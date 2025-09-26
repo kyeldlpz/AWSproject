@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Serverless Voting Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   Animated background grid 
+  <div class="grid-background"></div>
+  <div class="gradient-overlay"></div>
+
+   Navigation 
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="brand-text">VoteStream</span>
+      </div>
+      <div class="nav-status">
+        <div class="status-indicator">
+          <div class="status-dot"></div>
+          <span>Live</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+   Hero Section 
+  <header class="hero">
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span class="badge-text">Powered by AWS Serverless</span>
+      </div>
+      <h1 class="hero-title">
+        Real-time Voting
+        <span class="title-gradient">Platform</span>
+      </h1>
+      <p class="hero-description">
+        Experience the power of serverless architecture with our enterprise-grade voting system built on AWS Amplify, API Gateway, Lambda, and DynamoDB.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number" id="totalVotes">0</div>
+          <div class="stat-label">Total Votes</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">< 100ms</div>
+          <div class="stat-label">Response Time</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+
+      <section class="voting-section">
+        <div class="section-header">
+          <h2 class="section-title">Cast Your Vote</h2>
+          <p class="section-description">Select your preferred option and submit your vote securely</p>
+        </div>
+        
+        <div class="voting-card">
+          <div class="vote-options">
+            <label class="vote-option" for="optionA">
+              <input type="radio" name="vote" value="OptionA" id="optionA">
+              <div class="option-content">
+                <div class="option-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="option-text">
+                  <span class="option-title">Option A</span>
+                  <span class="option-subtitle">Innovation First</span>
+                </div>
+              </div>
+              <div class="option-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </label>
+            
+            <label class="vote-option" for="optionB">
+              <input type="radio" name="vote" value="OptionB" id="optionB">
+              <div class="option-content">
+                <div class="option-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="option-text">
+                  <span class="option-title">Option B</span>
+                  <span class="option-subtitle">Stability Focus</span>
+                </div>
+              </div>
+              <div class="option-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </label>
+          </div>
+          
+          <button id="voteBtn" class="vote-button">
+            <span class="button-text">Submit Vote</span>
+            <div class="button-loader">
+              <div class="loader-spinner"></div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+       Results Section 
+      <section class="results-section">
+        <div class="section-header">
+          <h2 class="section-title">Live Results</h2>
+          <p class="section-description">Real-time voting results powered by AWS infrastructure</p>
+        </div>
+        
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-header">
+              <div class="result-info">
+                <h3 class="result-title">Option A</h3>
+                <p class="result-subtitle">Innovation First</p>
+              </div>
+              <div class="result-count">
+                <span id="countA">0</span>
+                <span class="count-label">votes</span>
+              </div>
+            </div>
+            <div class="result-progress">
+              <div class="progress-track">
+                <div id="barA" class="progress-fill progress-a"></div>
+              </div>
+              <div class="progress-percentage" id="percentA">0%</div>
+            </div>
+          </div>
+          
+          <div class="result-card">
+            <div class="result-header">
+              <div class="result-info">
+                <h3 class="result-title">Option B</h3>
+                <p class="result-subtitle">Stability Focus</p>
+              </div>
+              <div class="result-count">
+                <span id="countB">0</span>
+                <span class="count-label">votes</span>
+              </div>
+            </div>
+            <div class="result-progress">
+              <div class="progress-track">
+                <div id="barB" class="progress-fill progress-b"></div>
+              </div>
+              <div class="progress-percentage" id="percentB">0%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+       Architecture Section 
+      <section class="architecture-section">
+        <div class="section-header">
+          <h2 class="section-title">AWS Architecture</h2>
+          <p class="section-description">Built with enterprise-grade serverless services</p>
+        </div>
+        
+        <div class="architecture-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 16V8A2 2 0 0 0 19 6H5A2 2 0 0 0 3 8V16A2 2 0 0 0 5 18H19A2 2 0 0 0 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 10H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 14H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="service-name">Amplify</h3>
+            <p class="service-description">Frontend hosting & CI/CD</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="service-name">Lambda</h3>
+            <p class="service-description">Serverless compute</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="service-name">API Gateway</h3>
+            <p class="service-description">RESTful API management</p>
+          </div>
+          
+          <div class="service-card">
+            <div class="service-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 13H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16 17H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 9H8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="service-name">DynamoDB</h3>
+            <p class="service-description">NoSQL database</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <p class="footer-text">Built with precision using AWS Serverless Architecture</p>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Documentation</a>
+          <a href="#" class="footer-link">GitHub</a>
+          <a href="#" class="footer-link">AWS Console</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
